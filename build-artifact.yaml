@@ -1,4 +1,4 @@
-mage: ayufan/android-fastlane
+image: ayufan/android-fastlane
 
 cache:
   paths:
