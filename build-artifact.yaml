@@ -1,0 +1,23 @@
+mage: ayufan/android-fastlane
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+stages:
+    - assemble
+
+before_script:
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - mkdir -p /opt/android-sdk-linux/licenses || true
+    - touch /opt/android-sdk-linux/licenses/android-sdk-license || true
+    - echo "$SDK_TOOLS_LICENSE" > /opt/android-sdk-linux/licenses/android-sdk-license || true
+    
+assemble:
+    stage: assemble
+    script:
+        - ./gradlew clean
+        - ./gradlew android:assemble android:artifactoryPublish
+    only:
+        - master
